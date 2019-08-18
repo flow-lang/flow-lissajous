@@ -1,6 +1,4 @@
 export default ({ REC_START, REC_STOP, EVAL }) => {
-  console.log(REC_START, REC_STOP, EVAL)
-
   return {
     update: (snippets = []) => 
       window.meta.flow(snippets.map(snippet => ({
@@ -8,7 +6,6 @@ export default ({ REC_START, REC_STOP, EVAL }) => {
         payload: snippet
       }))),
     eval: snippet => () => {
-      console.log(snippet)
       // We don't want to have to write `var x = ...` whenever we're declrating a 
       // new variable when live coding. If we drop the `var` though the browser will
       // complain about things not being defined. To get around this we force them
