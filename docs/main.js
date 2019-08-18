@@ -3469,11 +3469,11 @@ function update(_ref, model) {
 
 function view(model) {
   // DOM node for the code editor
-  var editor = _dom.Element.textarea([_dom.Attribute.className("\n    bg-gray-800 rounded leading-normal resize-none w-full h-full p-4\n    outline-none focus:outline-none\n  ")]); // DOM node that displays the snippet of code that was most recently
+  var editor = _dom.Element.textarea([_dom.Attribute.className("\n    bg-gray-800 rounded leading-normal resize-none w-full h-full p-6\n    outline-none focus:outline-none\n  ")]); // DOM node that displays the snippet of code that was most recently
   // evaluated. 
 
 
-  var history = _dom.Element.pre([_dom.Attribute.className("\n    bg-gray-900 leading-normal w-full h-full p-4 font-mono\n  ")], [model.code]);
+  var history = _dom.Element.pre([_dom.Attribute.className("\n    bg-gray-900 leading-normal w-full h-full p-6 font-mono\n  ")], [model.code]);
 
   return _dom.Element.main([_dom.Attribute.className('text-gray-100')], [// Header ------------------------------------------------------------------
   _dom.Element.h1([_dom.Attribute.className('text-center text-3xl')], ['Lissajous + Flow = ❤️']), // Info --------------------------------------------------------------------
@@ -3550,7 +3550,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53242" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54115" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
