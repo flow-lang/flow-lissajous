@@ -10,7 +10,7 @@
   },
   "scripts": {
     "watch": "parcel watch ./dev/main.js -d ./environment",
-    "dev": "http-server ./environment -c-1" 
+    "dev": "npm run watch & http-server ./environment -c-1" 
   },
   "repository": {
     "type": "git",
