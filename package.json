@@ -9,8 +9,8 @@
     "parcel-bundler": "^1.12.3"
   },
   "scripts": {
-    "watch": "parcel watch ./dev/main.js -d ./environment",
-    "dev": "npm run watch & http-server ./environment -c-1" 
+    "watch": "parcel watch ./dev/main.js -d ./docs",
+    "dev": "npm run watch & http-server ./docs -c-1" 
   },
   "repository": {
     "type": "git",
