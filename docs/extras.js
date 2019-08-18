@@ -37,7 +37,11 @@ function _m(value, iterations) {
   return values;
 }
 
-var ambi = []
+// Wrap all these samples being loaded in an timeout with a duration of 0. This
+// forces it to wait at the back of the event queue, making sure the UI and what
+// not can finish rendering before we attempt this.
+setTimeout(() => {
+window.ambi = []
 loadSounds([
   './samples/ambi_choir.flac',
   './samples/ambi_dark_woosh.flac',
@@ -52,7 +56,7 @@ loadSounds([
   './samples/ambi_swoosh.flac',
 ], list => ambi = list)
 
-var bass = []
+window.bass = []
 loadSounds([
   './samples/bass_dnb_f.flac',
   './samples/bass_drop_c.flac',
@@ -65,7 +69,7 @@ loadSounds([
   './samples/bass_woodsy_c.flac',
 ], list => bass = list)
 
-var bd = []
+window.bd = []
 loadSounds([
   './samples/bd_808.flac',
   './samples/bd_ada.flac',
@@ -82,7 +86,7 @@ loadSounds([
   './samples/bd_zum.flac',
 ], list => bd = list)
 
-var drum = []
+window.drum = []
 loadSounds([
   './samples/drum_bass_hard.flac',
   './samples/drum_bass_soft.flac',
@@ -106,7 +110,7 @@ loadSounds([
   './samples/drum_tom_mid_soft.flac',
 ], list => drum = list)
 
-var elec
+window.elec
 loadSounds([
   './samples/elec_beep.flac',
   './samples/elec_bell.flac',
@@ -135,7 +139,7 @@ loadSounds([
   './samples/elec_wood.flac',
 ], list => elec = list)
 
-var glitch
+window.glitch
 loadSounds([
   './samples/glitch_bass_g.flac',
   './samples/glitch_perc1.flac',
@@ -155,7 +159,7 @@ loadSounds([
   './samples/guit_harmonics.flac',
 ], list => guit = list)
 
-var loop
+window.loop
 loadSounds([
   './samples/loop_3d_printer.flac',
   './samples/loop_amen.flac',
@@ -176,7 +180,7 @@ loadSounds([
   './samples/loop_weirdo.flac',
 ], list => loop = list)
 
-var mehackit
+window.mehackit
 loadSounds([
   './samples/mehackit_phone1.flac',
   './samples/mehackit_phone2.flac',
@@ -191,14 +195,14 @@ loadSounds([
   './samples/mehackit_robot7.flac',
 ], list => mehackit = list)
 
-var misc
+window.misc
 loadSounds([
   './samples/misc_burp.flac',
   './samples/misc_cineboom.flac',
   './samples/misc_crow.flac',
 ], list => misc = list)
 
-var perc
+window.perc
 loadSounds([
   './samples/perc_bell.flac',
   './samples/perc_bell2.flac',
@@ -212,7 +216,7 @@ loadSounds([
   './samples/perc_till.flac',
 ], list => perc = list)
 
-var sn
+window.sn
 loadSounds([
   './samples/sn_dolf.flac',
   './samples/sn_dub.flac',
@@ -220,7 +224,7 @@ loadSounds([
   './samples/sn_zome.flac',
 ], list => sn = list)
 
-var tabla
+window.tabla
 loadSounds([
   './samples/tabla_dhec.flac',
   './samples/tabla_ghe1.flac',
@@ -250,13 +254,14 @@ loadSounds([
   './samples/tabla_tun3.flac',
 ], list => tabla = list)
 
-var vinyl
+window.vinyl
 loadSounds([
   './samples/vinyl_backspin.flac',
   './samples/vinyl_hiss.flac',
   './samples/vinyl_rewind.flac',
   './samples/vinyl_scratch.flac',
 ], list => vinyl = list)
+}, 0)
 
 /*
 ambi_choir.flac
