@@ -62,13 +62,13 @@ function update ({ action, payload }, model) {
 function view (model) {
   // DOM node for the code editor
   const editor = E.textarea([ A.className(`
-    bg-gray-800 rounded leading-normal resize-none w-full h-full p-4
+    bg-gray-800 rounded leading-normal resize-none w-full h-full p-6
     outline-none focus:outline-none
   `) ])
   // DOM node that displays the snippet of code that was most recently
   // evaluated. 
   const history = E.pre([ A.className(`
-    bg-gray-900 leading-normal w-full h-full p-4 font-mono
+    bg-gray-900 leading-normal w-full h-full p-6 font-mono
   `) ], [ model.code ])
 
   return E.main([ A.className('text-gray-100') ], [
@@ -120,6 +120,7 @@ const Lissajous = LissajousPlugin({ REC_START, REC_STOP, EVAL })
 
 App.use(Lissajous)
 App.use(Event)
+
 App.start({
   context: window.context,
   root: document.querySelector('#app'),
