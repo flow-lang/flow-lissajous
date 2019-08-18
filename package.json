@@ -10,7 +10,9 @@
   },
   "scripts": {
     "watch": "parcel watch ./dev/main.js -d ./docs",
-    "dev": "npm run watch & http-server ./docs -c-1" 
+    "build": "parcel build ./dev/main.js -d ./docs",
+    "dev": "npm run watch & http-server ./docs -c-1",
+    "deploy": "npm run build && git add docs/* && git commit -m \":memo: Deploy gh-pages\""
   },
   "repository": {
     "type": "git",
