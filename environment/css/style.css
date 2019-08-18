@@ -13,8 +13,9 @@ body {
   padding: 0;
 }
 
-#code {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+#app > main {
   height: 100%;
+  display: grid;
+  grid-template-rows: 
+    50px auto 1fr;
 }
