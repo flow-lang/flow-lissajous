@@ -60,20 +60,37 @@ function update ({ action, payload }, model) {
 
 // View ------------------------------------------------------------------------
 function view (model) {
+  // DOM node for the code editor
   const editor = E.textarea([ A.className(`
-    bg-gray-800 rounded leading-normal resize-none w-full h-full py-2 px-3
+    bg-gray-800 rounded leading-normal resize-none w-full h-full p-4
     outline-none focus:outline-none
-    text-gray-100
   `) ])
-  const history = E.div([ A.className(`
-    bg-gray-900 leading-normal w-full h-full py-2 px-3
-    text-gray-100
-  `) ], [
-    E.pre([], [ model.code ])
-  ])
+  // DOM node that displays the snippet of code that was most recently
+  // evaluated. 
+  const history = E.pre([ A.className(`
+    bg-gray-900 leading-normal w-full h-full p-4 font-mono
+  `) ], [ model.code ])
 
-  return E.main([ A.className('h-full') ], [
-    E.section([ A.id('code') ], [
+  return E.main([ A.className('text-gray-100') ], [
+    // Header ------------------------------------------------------------------
+    E.h1([ A.className('text-center text-3xl') ], [
+      'Lissajous + Flow = ❤️'
+    ]),
+    // Info --------------------------------------------------------------------
+    E.section([A.className('flex text-gray-700 text-justify') ], [
+      E.div([ A.className('flex-1 py-2 px-6')], [ 
+        'Drag and drop audio files anywhere on the page to load them into ',
+        'Lissajous. You can then reference them by filename in your tracks. ',
+        'Ctrl+Enter will evaluate the current line. Ctrl+Shift+Enter will ',
+        'evaluate everything. You can evualute multiple lines by selecting them ',
+        'and then pressing Ctrl+Enter.'
+      ]),
+      E.div([ A.className('flex-1 py-2 px-6')], [ 
+        'The most recent snippet of code that was evaluated gets shown here!'
+      ]),
+    ]),
+    // Editor ------------------------------------------------------------------
+    E.section([A.className('flex pt-4') ], [    
       editor, 
       history
     ])

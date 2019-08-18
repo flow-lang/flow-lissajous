@@ -3323,7 +3323,6 @@ var _default = function _default(_ref) {
   var REC_START = _ref.REC_START,
       REC_STOP = _ref.REC_STOP,
       EVAL = _ref.EVAL;
-  console.log(REC_START, REC_STOP, EVAL);
   return {
     update: function update() {
       var snippets = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
@@ -3336,14 +3335,13 @@ var _default = function _default(_ref) {
     },
     eval: function _eval(snippet) {
       return function () {
-        console.log(snippet); // We don't want to have to write `var x = ...` whenever we're declrating a 
+        // We don't want to have to write `var x = ...` whenever we're declrating a 
         // new variable when live coding. If we drop the `var` though the browser will
         // complain about things not being defined. To get around this we force them
         // to be global by assigning them to the window. eg:
         //   var a = new track()
         // becomes
         //   window.a = new track()
-
         var globalCode = snippet.replace(/([a-zA-Z]+)\s*=/g, 'window.$1 =');
         eval(globalCode);
       };
@@ -3470,11 +3468,17 @@ function update(_ref, model) {
 
 
 function view(model) {
-  var editor = _dom.Element.textarea([_dom.Attribute.className("\n    bg-gray-800 rounded leading-normal resize-none w-full h-full py-2 px-3\n    outline-none focus:outline-none\n    text-gray-100\n  ")]);
+  // DOM node for the code editor
+  var editor = _dom.Element.textarea([_dom.Attribute.className("\n    bg-gray-800 rounded leading-normal resize-none w-full h-full p-4\n    outline-none focus:outline-none\n  ")]); // DOM node that displays the snippet of code that was most recently
+  // evaluated. 
 
-  var history = _dom.Element.div([_dom.Attribute.className("\n    bg-gray-900 leading-normal w-full h-full py-2 px-3\n    text-gray-100\n  ")], [_dom.Element.pre([], [model.code])]);
 
-  return _dom.Element.main([_dom.Attribute.className('h-full')], [_dom.Element.section([_dom.Attribute.id('code')], [editor, history])]);
+  var history = _dom.Element.pre([_dom.Attribute.className("\n    bg-gray-900 leading-normal w-full h-full p-4 font-mono\n  ")], [model.code]);
+
+  return _dom.Element.main([_dom.Attribute.className('text-gray-100')], [// Header ------------------------------------------------------------------
+  _dom.Element.h1([_dom.Attribute.className('text-center text-3xl')], ['Lissajous + Flow = ❤️']), // Info --------------------------------------------------------------------
+  _dom.Element.section([_dom.Attribute.className('flex text-gray-700 text-justify')], [_dom.Element.div([_dom.Attribute.className('flex-1 py-2 px-6')], ['Drag and drop audio files anywhere on the page to load them into ', 'Lissajous. You can then reference them by filename in your tracks. ', 'Ctrl+Enter will evaluate the current line. Ctrl+Shift+Enter will ', 'evaluate everything. You can evualute multiple lines by selecting them ', 'and then pressing Ctrl+Enter.']), _dom.Element.div([_dom.Attribute.className('flex-1 py-2 px-6')], ['The most recent snippet of code that was evaluated gets shown here!'])]), // Editor ------------------------------------------------------------------
+  _dom.Element.section([_dom.Attribute.className('flex pt-4')], [editor, history])]);
 } // Listen ----------------------------------------------------------------------
 
 
@@ -3546,7 +3550,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64660" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53242" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
