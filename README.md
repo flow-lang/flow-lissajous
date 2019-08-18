@@ -1,5 +1,11 @@
 <img src="https://raw.github.com/kylestetz/lissajous/master/environment/images/lissajous-repo-logo.jpg" />
 
+# Setup
+* Clone this repository
+* `npm i` to install dependencies
+* `npm run dev` to spin up a development server
+* Head to localhost:8080
+
 ## Lissajous
 
 Lissajous is a tool for real time audio performance using Javascript. It wraps succinct tools for creating oscillators and samplers into a chainable API, allowing performers to build and improvise songs with a minimum of code.
