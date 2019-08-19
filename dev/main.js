@@ -30,19 +30,23 @@ function update ({ action, payload }, model) {
 
   switch (action) {
     case EVAL: {
-      const redacted = payload.replace('meta.record()', '')
+      const redacted = payload
+        .replace('meta.record()', '')
         .replace('meta.stop()', '')
         
       return [{ ...model,
         code: payload,
-        history: model.recording && /\S/.test(redacted) ? [ ...model.history, redacted ] : model.history
+        history: model.recording && /\S/.test(redacted)
+          ? [ ...model.history, redacted ]
+          : model.history
       }, Lissajous.eval(payload)]
     }
 
     case REC_START: {
       return [{ ...model,
+        history: [],
         recording: true
-      }]
+      }, Lissajous.update([])]
     }
 
     case REC_STOP: {
@@ -68,10 +72,10 @@ function view (model) {
   // DOM node that displays the snippet of code that was most recently
   // evaluated. 
   const history = E.pre([ A.className(`
-    bg-gray-900 leading-normal w-full h-full p-6 font-mono
+    bg-gray-900 leading-normal w-full h-full p-6 font-mono whitespace-pre-wrap
   `) ], [ model.code ])
 
-  return E.main([ A.className('text-gray-100') ], [
+  return E.main([ A.className('text-gray-100 text-sm') ], [
     // Header ------------------------------------------------------------------
     E.h1([ A.className('text-center text-3xl') ], [
       'Lissajous + Flow = ❤️'
@@ -107,9 +111,12 @@ function listen (model) {
         ? value.substring(selectionStart, selectionEnd)
         : value.split('\n')[line]
   
-      return key == 'Enter' && ctrlKey
-        ? { action: EVAL, payload: shiftKey ? value : code }
-        : {}
+      if (key == 'Enter' && ctrlKey) {
+        return {
+          action: EVAL,
+          payload: shiftKey ? value : code
+        }
+      }
     })
   ]
 }
