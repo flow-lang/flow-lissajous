@@ -13,7 +13,7 @@ export default ({ REC_START, REC_STOP, EVAL }) => {
       //   var a = new track()
       // becomes
       //   window.a = new track()
-      const globalCode = snippet.replace(/([a-zA-Z]+)\s*=/g, 'window.$1 =')
+      const globalCode = snippet.replace(/^([a-zA-Z]+)\s*=/g, 'window.$1 =')
       eval(globalCode)
     },
     // Plugin data ===============================================================
