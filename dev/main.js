@@ -1,7 +1,4 @@
-import { instrument, effect } from './flow/program'
-import { Element as E, Attribute as A, Event } from './flow/dom'
-import { Node as N, Property as P } from './flow/dom'
-
+import { Program, Audio, DOM } from '@flow-lang/framework'
 // This plugin is a function rather than an object. It returns a proper plugin
 // object once it has been constructed.
 import LissajousPlugin from './flow-lissajous'
@@ -24,11 +21,14 @@ function init (flags) {
 const EVAL = 'eval'
 const REC_START = 'rec-start'
 const REC_STOP = 'rec-stop'
+const NOOP = 'no-op'
 
 function update ({ action, payload }, model) {
   if (!action) return model
 
   switch (action) {
+    case NOOP: return model
+
     case EVAL: {
       const redacted = payload
         .replace('meta.record()', '')
@@ -63,6 +63,8 @@ function update ({ action, payload }, model) {
 }
 
 // View ------------------------------------------------------------------------
+const { Element: E, Attribute: A } = DOM
+
 function view (model) {
   // DOM node for the code editor
   const editor = E.textarea([ A.className(`
@@ -104,7 +106,7 @@ function view (model) {
 // Listen ----------------------------------------------------------------------
 function listen (model) {
   return [
-    Event.keydown('textarea', ({ key, ctrlKey, shiftKey, target }) => {
+    DOM.Event.keydown('textarea', ({ key, ctrlKey, shiftKey, target }) => {
       const { value, selectionStart, selectionEnd } = target
       const line = value.substr(0, selectionStart).split('\n').length - 1
       const code = selectionStart !== selectionEnd
@@ -116,17 +118,21 @@ function listen (model) {
           action: EVAL,
           payload: shiftKey ? value : code
         }
+      } else {
+        return {
+          action: NOOP
+        }
       }
     })
   ]
 }
 
 // App -------------------------------------------------------------------------
-const App = instrument({ init, update, audio: () => [], view, listen })
+const App = Program.instrument(init, update, () => [], view, listen)
 const Lissajous = LissajousPlugin({ REC_START, REC_STOP, EVAL })
 
 App.use(Lissajous)
-App.use(Event)
+App.use(DOM.Event)
 
 App.start({
   context: window.context,
