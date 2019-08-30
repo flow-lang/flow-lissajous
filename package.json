@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "<img src=\"https://raw.github.com/kylestetz/lissajous/master/environment/images/lissajous-repo-logo.jpg\" />",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "@flow-lang/framework": "^1.0.3"
+  },
   "devDependencies": {
     "http-server": "^0.11.1",
     "parcel-bundler": "^1.12.3"
